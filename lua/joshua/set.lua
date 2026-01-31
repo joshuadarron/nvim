@@ -10,6 +10,9 @@ vim.opt.sessionoptions = {
 
 vim.opt.guicursor = ""
 
+-- Force shell environment init so Telescope can find rg/fd
+vim.fn.system('rg --version')
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
