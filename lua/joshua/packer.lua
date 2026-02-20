@@ -59,6 +59,10 @@ return require("packer").startup(function(use)
     use "Mofiqul/dracula.nvim"
 
     use {
+        "stevearc/conform.nvim",
+    }
+
+    use {
       "mfussenegger/nvim-dap",
       requires = {
         "rcarriga/nvim-dap-ui",
