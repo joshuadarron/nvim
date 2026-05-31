@@ -52,5 +52,16 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,         -- Show dotfiles (e.g. .git, .env)
     git_ignored = false       -- Show files ignored by git
+  },
+  filesystem_watchers = {
+    enable = true,
+    debounce_delay = 50,
+    ignore_dirs = {
+      "%.venv",
+      "node_modules",
+      "%.git",
+      "__pycache__",
+      "%.dist%-info",  -- catches orphaned ~ip-*.dist-info too
+    },
   }
 })
