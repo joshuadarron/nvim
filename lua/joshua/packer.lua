@@ -84,6 +84,9 @@ return require("packer").startup(function(use)
                 auto_save_enabled = true,
                 auto_restore_enabled = true,
                 auto_session_use_git_branch = false,
+                -- close nvim-tree before saving so the tree is never the restored buffer
+                pre_save_cmds = { "NvimTreeClose" },
+                bypass_session_save_file_types = { "NvimTree" },
                 session_lens = {
                     buftypes_to_ignore = {},
                     load_on_setup = false,

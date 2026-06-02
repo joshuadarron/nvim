@@ -72,6 +72,8 @@ require("nvim-tree").setup({
       "%.git",
       "__pycache__",
       "%.dist%-info",  -- catches orphaned ~ip-*.dist-info too
+      "build",
+      "dist",
     },
   }
 })
