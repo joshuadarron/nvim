@@ -1,10 +1,13 @@
+-- No "globals": it persisted NvimTreeSetup/NvimTreeRequired into session files.
+-- "blank" is required or :mksession silently drops unnamed / buftype=nofile
+-- windows, producing a session that restores to an empty buffer.
 vim.opt.sessionoptions = {
+	"blank",        -- unnamed / nofile windows
 	"buffers",      -- open buffers
 	"curdir",       -- current dir
 	"tabpages",     -- tabs
 	"winsize",      -- window size
 	"help",         -- help windows
-	"globals",      -- global vars
 	"localoptions", -- local settings (folds etc.)
 }
 
@@ -57,23 +60,3 @@ vim.g.loaded_node_provider = 0
 
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
-
-require("nvim-tree").setup({
-  filters = {
-    dotfiles = false,         -- Show dotfiles (e.g. .git, .env)
-    git_ignored = false       -- Show files ignored by git
-  },
-  filesystem_watchers = {
-    enable = true,
-    debounce_delay = 50,
-    ignore_dirs = {
-      "%.venv",
-      "node_modules",
-      "%.git",
-      "__pycache__",
-      "%.dist%-info",  -- catches orphaned ~ip-*.dist-info too
-      "build",
-      "dist",
-    },
-  }
-})
