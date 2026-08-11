@@ -1,19 +1,8 @@
 # Compiled plugin files
 plugin/packer_compiled.lua
 
-# Session storage
-sessions/
-session/
-
-# Swap and undo files
-*.swp
-*.swo
-*.un~
-*.bak
-
 # Logs
 *.log
 
 # LuaLS
 .luarc.json
-

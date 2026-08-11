@@ -26,8 +26,10 @@ vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>B", function()
 	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end)
-vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "DAP: Toggle REPL" })
-vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP: Toggle UI" })
+-- On F-keys, not <leader>d*: <leader>d is the black-hole delete operator, and a
+-- <leader>d? successor makes every use of it wait out 'timeoutlen'.
+vim.keymap.set("n", "<F7>", dap.repl.toggle, { desc = "DAP: Toggle REPL" })
+vim.keymap.set("n", "<F6>", dapui.toggle, { desc = "DAP: Toggle UI" })
 
 -- ╭───────────────────────────────╮
 -- │ 🟨 JavaScript / TypeScript    │
