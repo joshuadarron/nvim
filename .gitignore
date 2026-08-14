@@ -1,6 +1,3 @@
-# Compiled plugin files
-plugin/packer_compiled.lua
-
 # Logs
 *.log
 
