@@ -21,12 +21,30 @@ return {
 			local cmp = require("cmp")
 
 			cmp.setup({
-				sources = {
-					{ name = "path" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip", keyword_length = 2 },
-					{ name = "buffer", keyword_length = 3 },
+				performance = {
+					debounce = 60,
+					throttle = 30,
+					fetching_timeout = 200,
+					max_view_entries = 40,
 				},
+				-- cmp.config.sources(g1, g2) is what produces real group semantics:
+				-- group 2 is only consulted when group 1 yields nothing. A flat list
+				-- with group_index keys set by hand is not equivalent.
+				--
+				-- max_item_count matters most for nvim_lsp: rust_analyzer and vtsls
+				-- routinely return 1000+ items for a bare `.`, and max_view_entries
+				-- caps only what is drawn, not what is filtered and sorted per
+				-- keystroke.
+				--
+				-- cmp-buffer's default get_bufnrs is already current-buffer-only.
+				-- Do not widen it.
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp", max_item_count = 30 },
+					{ name = "luasnip", keyword_length = 2, max_item_count = 5 },
+					{ name = "path", max_item_count = 10 },
+				}, {
+					{ name = "buffer", keyword_length = 3, max_item_count = 5 },
+				}),
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)

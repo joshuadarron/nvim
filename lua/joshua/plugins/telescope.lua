@@ -1,3 +1,25 @@
+-- Mirrors the ignore set in lua/joshua/plugins/nvim-tree.lua's filesystem_watchers
+-- -- keep the two in sync. NOTE: these are Lua patterns matched against the full
+-- path, not globs, hence the explicit [/\\] for Windows separators. Writing them
+-- as globs is the usual reason this setting silently does nothing.
+local IGNORE = {
+	"^%.git[/\\]",
+	"[/\\]%.git[/\\]",
+	"node_modules[/\\]",
+	"%.venv[/\\]",
+	"__pycache__[/\\]",
+	"[/\\]dist[/\\]",
+	"[/\\]build[/\\]",
+	"%.dist%-info[/\\]",
+	"%.lock$",
+	"%.png$",
+	"%.jpg$",
+	"%.jpeg$",
+	"%.gif$",
+	"%.pdf$",
+	"%.zip$",
+}
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -34,7 +56,34 @@ return {
 			},
 		},
 		config = function()
-			require("telescope").setup({})
+			require("telescope").setup({
+				defaults = {
+					file_ignore_patterns = IGNORE,
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--hidden",
+						"--glob",
+						"!**/.git/*",
+					},
+					path_display = { "truncate" },
+					sorting_strategy = "ascending",
+					layout_config = { prompt_position = "top" },
+				},
+				pickers = {
+					-- fd filters before Telescope's patterns get a look in, and is
+					-- markedly faster than the fallback probe order.
+					find_files = {
+						find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--exclude", ".git" },
+					},
+					buffers = { sort_lastused = true, sort_mru = true },
+				},
+			})
 			pcall(require("telescope").load_extension, "repo")
 		end,
 	},

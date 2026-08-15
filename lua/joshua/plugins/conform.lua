@@ -7,7 +7,7 @@ return {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_fallback = true })
+					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
 				mode = { "n", "v" },
 				desc = "Format buffer",
@@ -71,14 +71,14 @@ return {
 						local found = vim.fs.find(patterns, {
 							upward = true,
 							path = vim.fs.dirname(bufname),
-							stop = vim.env.HOME or vim.fn.expand("~"),
+							stop = (vim.uv or vim.loop).os_homedir(),
 						})
 						if #found > 0 then
-							return { timeout_ms = 2000, lsp_fallback = true }
+							return { timeout_ms = 2000, lsp_format = "fallback" }
 						end
 					else
 						-- No config check defined for this formatter, allow it (e.g. rustfmt works without config)
-						return { timeout_ms = 2000, lsp_fallback = true }
+						return { timeout_ms = 2000, lsp_format = "fallback" }
 					end
 				end
 
