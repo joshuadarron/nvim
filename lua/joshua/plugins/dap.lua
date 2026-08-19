@@ -69,7 +69,7 @@ return {
 			},
 		},
 		config = function()
-			require("config.dap")
+			require("joshua.dap")
 		end,
 	},
 }

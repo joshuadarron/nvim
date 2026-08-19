@@ -1,3 +1,6 @@
+# Machine/project-local DAP configs (workspace paths, credentials)
+lua/joshua/dap/local.lua
+
 # Logs
 *.log
 
