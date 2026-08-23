@@ -3,7 +3,13 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
+			-- cmd so :Mason is reachable from a cold start, not only once
+			-- nvim-lspconfig has pulled it in on BufReadPre.
+			{
+				"mason-org/mason.nvim",
+				cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonUpdate", "MasonLog" },
+				opts = {},
+			},
 			"mason-org/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
