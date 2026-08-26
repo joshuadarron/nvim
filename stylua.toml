@@ -1,0 +1,11 @@
+# conform gates lua format-on-save on this file's presence
+# (lua/joshua/plugins/conform.lua). Without it, the one codebase this config
+# never formatted was itself.
+#
+# Values match what the files already use, so adding this is close to a no-op.
+column_width = 120
+line_endings = "Unix"
+indent_type = "Tabs"
+indent_width = 4
+quote_style = "AutoPreferDouble"
+call_parentheses = "Always"

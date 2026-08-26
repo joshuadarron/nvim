@@ -1,0 +1,7 @@
+# core.autocrlf=true would hand out CRLF on checkout while stylua.toml asks for
+# LF, so `stylua --check` would fail in every fresh clone and format-on-save
+# would silently rewrite line endings on every write. Pin .lua to LF on disk.
+*.lua text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
