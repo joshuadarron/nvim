@@ -54,6 +54,15 @@ return {
 				end,
 				desc = "Telescope: grep string",
 			},
+			{
+				-- The repo extension is registered in `config` below, so this is only
+				-- valid once telescope has loaded -- which pressing the key guarantees.
+				"<leader>pr",
+				function()
+					require("telescope").extensions.repo.list()
+				end,
+				desc = "Telescope: repos",
+			},
 		},
 		config = function()
 			require("telescope").setup({
